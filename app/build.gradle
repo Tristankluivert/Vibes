@@ -1,3 +1,9 @@
+import dependencies.AndroidTestDependencies
+import dependencies.AnnotationProcessing
+import dependencies.Dependencies
+import dependencies.TestDependencies
+import dependencies.Versions
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
@@ -8,17 +14,18 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion Versions.compileSdk
     buildToolsVersion "30.0.3"
 
-    defaultConfig {
-        applicationId "com.kluivert.vibes"
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    defaultConfig {
+        applicationId dependencies.Application.id
+        minSdkVersion Versions.minsdk
+        targetSdkVersion Versions.targetsdk
+        versionCode dependencies.Application.version_code
+        versionName dependencies.Application.version_name
+
+        testInstrumentationRunner AndroidTestDependencies.androidTesting
     }
 
     buildTypes {
@@ -43,69 +50,75 @@ android {
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.5.0'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+
+    //Default
+    implementation Dependencies.coreKtx
+    implementation Dependencies.appCompat
+    implementation Dependencies.material
+    implementation Dependencies.constraintLayout
+    implementation Dependencies.intuitsdp
+    implementation Dependencies.intuitssp
+    implementation Dependencies.cardView
+    implementation Dependencies.recyclerView
+    implementation Dependencies.swipeRefresh
+    implementation Dependencies.shimmer
+    implementation Dependencies.pallete
 
 
-    // Material Design
-    implementation 'com.google.android.material:material:1.4.0-beta01'
+
 
     // Architectural Components
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
+    implementation Dependencies.lifecyleViewModels
 
     // Lifecycle
-    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
+    implementation Dependencies.lifecycle_ext
+    implementation Dependencies.lifecycleLiveData
+    implementation Dependencies.lifecycleRuntime
+
 
     // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
+    implementation Dependencies.kotlin_coroutines_core
+    implementation Dependencies.kotlin_coroutines_android
 
-    // Coroutine Lifecycle Scopes
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
 
     // Navigation Component
-    implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"
-    implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
+    implementation Dependencies.navigation_fragment
+    implementation Dependencies.navigationUiKtx
 
     // Glide
-    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    implementation Dependencies.glide
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    kapt 'com.github.bumptech.glide:compiler:4.12.0'
+    kapt AnnotationProcessing.glideCompiler
 
     // Activity KTX for viewModels()
-    implementation "androidx.activity:activity-ktx:1.2.3"
+    implementation Dependencies.activity
 
     //Dagger - Hilt
-    implementation "com.google.dagger:hilt-android:2.33-beta"
-    kapt "com.google.dagger:hilt-android-compiler:2.28-alpha"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
-    kapt "androidx.hilt:hilt-compiler:1.0.0"
+    implementation Dependencies.hiltAndroid
+    kapt AnnotationProcessing.hiltAndroidCompiler
+    implementation Dependencies.hiltViewModel
+    kapt AnnotationProcessing.hiltCompiler
 
     // Timber
-    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation Dependencies.timber
 
     // Firebase Firestore
-    implementation 'com.google.firebase:firebase-firestore:23.0.0'
+    implementation Dependencies.firebaseAuth
+    implementation Dependencies.fireStore
 
     // Firebase Storage KTX
-    implementation 'com.google.firebase:firebase-storage-ktx:20.0.0'
+    implementation Dependencies.fireStorage
 
     // Firebase Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.3.8'
+    implementation Dependencies.kotlin_coroutiones_play
 
     // ExoPlayer
-    api "com.google.android.exoplayer:exoplayer-core:2.14.0"
-    api "com.google.android.exoplayer:exoplayer-ui:2.14.0"
-    api "com.google.android.exoplayer:extension-mediasession:2.14.0"
+    api Dependencies.exoCore
+    api Dependencies.exoUI
+    api Dependencies.exoMediaSession
 
 
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    testImplementation TestDependencies.junit4
+    androidTestImplementation AndroidTestDependencies.androidx_test_ext
+    androidTestImplementation AndroidTestDependencies.espresso_core
 }

@@ -52,7 +52,6 @@
             android:inputType="text"
             android:backgroundTint="@color/black"
             android:textColor="@color/white"
-
             android:background="@drawable/editext_background"
             />
 
@@ -78,7 +77,6 @@
             android:inputType="text"
             android:backgroundTint="@color/black"
             android:textColor="@color/white"
-
             android:background="@drawable/editext_background"
             />
 
@@ -106,7 +104,6 @@
             android:inputType="textPassword"
             android:backgroundTint="@color/black"
             android:textColor="@color/white"
-
             android:background="@drawable/editext_background"
             />
 
